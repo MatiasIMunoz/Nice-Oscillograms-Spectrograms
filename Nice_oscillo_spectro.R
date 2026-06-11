@@ -122,7 +122,8 @@ oscillo_LR <- plot_grid(ggoscilo_synth_L, ggoscilo_synth_R,
 oscillo_LR
 
 # Export figure
-ggsave("Hyla_stereo.pdf", plot = oscillo_LR, device = cairo_pdf, width = 9, height = 4)
+#ggsave("Hyla_stereo_oscillo.pdf", plot = oscillo_LR, device = cairo_pdf, width = 9, height = 4)
+ggsave("Hyla_stereo_oscillo.png", plot = oscillo_LR, width = 9, height = 4, units = "in", dpi = 600)
 
 #___________________________
 #
@@ -221,6 +222,10 @@ spectro_LR <- plot_grid(ggspectro_synth_L, ggspectro_synth_R,
                         align = "v"
 )
 spectro_LR
+
+# Export figure
+#ggsave("Hyla_stereo_spectro.pdf", plot = spectro_LR, device = cairo_pdf, width = 9, height = 6)
+ggsave("Hyla_stereo_spectro.png", plot = spectro_LR, width = 9, height = 6, units = "in", dpi = 600)
 
 #___________________________
 #

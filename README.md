@@ -13,8 +13,8 @@ ggplot2.
 Examples
 </h2>
 <p align="center">
-<img src="Hyla_stereo_oscillo.pdf" width="80"/>
-<img src="Hyla_stereo_spectro" width="80"/>
+<img src="Hyla_stereo_oscillo.png" width="400"/><br><br>
+<img src="Hyla_stereo_spectro.png" width="400"/>
 </p>
 <h2>
 Contact
