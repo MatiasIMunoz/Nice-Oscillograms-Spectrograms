@@ -23,7 +23,7 @@ library(cowplot) # for plot_grid function
 library(ggpubr) # for as_ggplot function
 library(extrafont) # AnimBehav likes Times New Roman
 loadfonts()
-# fonts() #uncomment if you want to see available fonts
+fonts() #uncomment if you want to see available fonts
 
 
 # Define font family for all figures (e.g., Arial or Times New Roman)
