@@ -16,16 +16,19 @@ library(seewave) # for audio manupulation
 library(tuneR) # for reading audio in R
 library(dynaSpec) # for spectrograms using ggplot
 
-library(wesanderson)
-library(viridis) # for color palettes.
+library(scico) # for color palettes. (batlow).
+library(wesanderson) # for color palette (Zissou1).
+library(viridisLite) # for color palettes (turbo).
+library(poisonfrogs) # for frog color palettes (Ramazonica).
+library(pals) # for color palettes (parula).
+
 library(Cairo) # for better pdf export.
-#library(poisonfrogs) # for frog color palettes.
 library(ggplot2) # for general plotting
 library(cowplot) # for plot_grid function
 library(ggpubr) # for as_ggplot function
 library(extrafont) # AnimBehav likes Times New Roman
 loadfonts()
-fonts() #uncomment if you want to see available fonts
+#fonts() #uncomment if you want to see available fonts
 
 
 # Define font family for all figures (e.g., Arial or Times New Roman)
@@ -134,6 +137,8 @@ oscillo_LR
 #___________________________
 # Define some basic spectrogram parameters:
 palette <- "turbo"      # color palette. Can try any viridis palette.
+palette <-  scico(100, palette = "batlow")
+
 freq.lim <- c(0, 5)     # frequency limits of spectrogram, in kHz.
 win.len <- 512          # window length, in samples.
 ovlp <-  90             # overlap between windows, in percent.
@@ -146,7 +151,9 @@ params_L <- prep_static_ggspectro_pal("Hyla_stereo.wav" ,
                                      channel = "left", # left channel.
                                      #colPal = BuYe,
                                      #colPal = c("#0a1e3f", "#f6e58d")
-                                     colPal = wes_palette("Zissou1", 100, type = "continuous"),,
+                                     #colPal = wes_palette("Zissou1", 100, type = "continuous"),
+                                     #colPal = scico(100, palette = "batlowK"),
+                                     colPal = parula(256),
                                      yLim = freq.lim, 
                                      wl = win.len,
                                      ovlp = ovlp,
@@ -164,7 +171,8 @@ params_R <- prep_static_ggspectro_pal("Hyla_stereo.wav" ,
                                      channel = "right", # right channel.
                                      #colPal = palette,
                                      #colPal = poison_palette("Ramazonica", return = "vector"),
-                                     colPal = wes_palette("Zissou1", 100, type = "continuous"),
+                                     #colPal = wes_palette("Zissou1", 100, type = "continuous"),
+                                     colPal = parula(256),
                                      yLim = freq.lim, 
                                      wl = win.len,
                                      ovlp = ovlp,
@@ -202,8 +210,7 @@ ggspectro_synth_L
 #Spectrogram RIGHT (bottom plot)
 ggspectro_synth_R <- params_R$spec[[1]]+
   scale_x_continuous(expand = c(0,0),  limits = c(0, max(time.s)))+
-  scale_y_continuous(expand = c(0,0), limits = freq.lim,
-                     breaks = seq(1,4,1), labels = seq(1,4,1))+
+  scale_y_continuous(expand = c(0,0), limits = freq.lim,breaks = seq(1,4,1), labels = seq(1,4,1))+
   labs(x = "Time (s)", y = "Frequency (kHz)")+
   theme(axis.text=element_text(size=14),
         axis.title=element_text(size=18, face="plain"),
