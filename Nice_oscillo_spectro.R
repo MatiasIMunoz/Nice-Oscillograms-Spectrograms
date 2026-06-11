@@ -17,7 +17,8 @@ library(tuneR) # for reading audio in R
 library(dynaSpec) # for spectrograms using ggplot
 
 library(viridis) # for color palettes.
-library(poisonfrogs) # for frog color palettes.
+library(Cairo) # for better pdf export.
+#library(poisonfrogs) # for frog color palettes.
 library(ggplot2) # for general plotting
 library(cowplot) # for plot_grid function
 library(ggpubr) # for as_ggplot function
@@ -120,7 +121,8 @@ oscillo_LR <- plot_grid(ggoscilo_synth_L, ggoscilo_synth_R,
           rel_heights = c(1, 1.25))
 oscillo_LR
 
-
+# Export figure
+ggsave("Hyla_stereo.pdf", plot = oscillo_LR, device = cairo_pdf, width = 9, height = 4)
 
 #___________________________
 #
