@@ -19,8 +19,9 @@ Code for making oscillograms and spectrograms of stereo files using ggplot2.
 <h2> Examples</h2>
 
 <p align="center">
-  <img src="Hyla_stereo_oscillo.png" width="400"/><br><br>
-  <img src="Hyla_stereo_spectro.png" width="400"/>
+  <img src="Hyla_stereo_oscillo.png" width="750"/>
+  <br><br>
+  <img src="Hyla_stereo_spectro.png" width="750"/>
 </p>
 
 <h2> Contact</h2>
