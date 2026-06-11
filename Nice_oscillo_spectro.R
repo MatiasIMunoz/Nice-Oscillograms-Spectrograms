@@ -16,6 +16,7 @@ library(seewave) # for audio manupulation
 library(tuneR) # for reading audio in R
 library(dynaSpec) # for spectrograms using ggplot
 
+library(wesanderson)
 library(viridis) # for color palettes.
 library(Cairo) # for better pdf export.
 #library(poisonfrogs) # for frog color palettes.
@@ -31,7 +32,8 @@ fonts() #uncomment if you want to see available fonts
 font.family <- 'Arial'
 #font.family <- 'Times New Roman'
 
-
+# Some color palettes
+BuYe <- rev(c("#f6e58d", "#f9d56e", "#f9bc3e", "#66bfbf", "#3f9dcf", "#2d6a9b", "#1c3f5a", "#0a1e3f"))
 
 #___________________________
 #
@@ -140,10 +142,11 @@ colbins <- abs(min.dB)  # color bins, one color bin per dB.
 
 # Make preliminar spectrograms. These will be used below:
 # Left channel:
-params_L <- prep_static_ggspectro_ch("Hyla_stereo.wav" ,
+params_L <- prep_static_ggspectro_pal("Hyla_stereo.wav" ,
                                      channel = "left", # left channel.
-                                     colPal = palette,
-                                     #colPal = c("#0a1e3f", "#f6e58d"),
+                                     #colPal = BuYe,
+                                     #colPal = c("#0a1e3f", "#f6e58d")
+                                     colPal = wes_palette("Zissou1", 100, type = "continuous"),,
                                      yLim = freq.lim, 
                                      wl = win.len,
                                      ovlp = ovlp,
@@ -157,9 +160,11 @@ params_L <- prep_static_ggspectro_ch("Hyla_stereo.wav" ,
 
 
 # Right channel:
-params_R <- prep_static_ggspectro_ch("Hyla_stereo.wav" ,
+params_R <- prep_static_ggspectro_pal("Hyla_stereo.wav" ,
                                      channel = "right", # right channel.
-                                     colPal = palette,
+                                     #colPal = palette,
+                                     #colPal = poison_palette("Ramazonica", return = "vector"),
+                                     colPal = wes_palette("Zissou1", 100, type = "continuous"),
                                      yLim = freq.lim, 
                                      wl = win.len,
                                      ovlp = ovlp,
