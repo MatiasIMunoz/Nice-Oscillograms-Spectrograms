@@ -10,6 +10,13 @@ ggplot2.
 <!-- ## Status -->
 <!-- Project is: _in progress_ -->
 <h2>
+Examples
+</h2>
+<p align="center">
+<img src="Hyla_stereo_oscillo.pdf" width="80"/>
+<img src="Hyla_stereo_spectro" width="80"/>
+</p>
+<h2>
 Contact
 </h2>
 

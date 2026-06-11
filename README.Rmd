@@ -16,5 +16,12 @@ Code for making oscillograms and spectrograms of stereo files using ggplot2.
 <!-- ## Status -->
 <!-- Project is: _in progress_ -->
 
+<h2> Examples</h2>
+<p align="center">
+  <img src="Hyla_stereo_oscillo.pdf" width="80"/>
+  <img src="Hyla_stereo_spectro.pdf" width="80"/>
+</p>
+
+
 <h2> Contact</h2>
 Created by [Matías I. Muñoz](https://sites.google.com/view/matiasmunozsandoval/contact?authuser=0) (<ma.munozsandoval@gmail.com>)
