@@ -1,5 +1,12 @@
+# Modified dynaSpec:::prep_static_ggspectro function to:
+# a) Handle stereo audio files.
+
+# Maybe modify to allow any color palette (not only viridis....)
+
+# Load library
 library(dynaSpec)
 
+# Modify original function. 
 prep_static_ggspectro_ch <- function (soundFile, destFolder, outFilename, savePNG = FALSE, 
           colPal = "inferno", crop = NULL, bg = NULL, filter = NULL, 
           xLim = NULL, yLim = c(0, 10), plotLegend = FALSE, onlyPlotSpec = TRUE, 
@@ -33,7 +40,8 @@ prep_static_ggspectro_ch <- function (soundFile, destFolder, outFilename, savePN
   if (!grepl(".png|PNG", outFilename)) {
     outFilename = paste0(outFilename, ".png")
   }
-  if (length(colPal) == 1) {
+
+   if (length(colPal) == 1) {
     isViridis <- T
   }
   else {
@@ -48,6 +56,7 @@ prep_static_ggspectro_ch <- function (soundFile, destFolder, outFilename, savePN
       bg = colPal[1]
     }
   }
+
   if (tools::file_ext(soundFile) == "mp3") {
     print("***Converting mp3 to wav***")
     wav0 <- tuneR::readMP3(soundFile)
@@ -59,11 +68,13 @@ prep_static_ggspectro_ch <- function (soundFile, destFolder, outFilename, savePN
   # if (wav0@stereo) {
   #   wav0 <- tuneR::mono(wav0, which = "left")
   # }
-  # Added to make it possible to choose the channel to plot. 
+  
+  # b) Added to make it possible to choose the channel to plot. ----
   if (wav0@stereo) {
     channel <- match.arg(channel, c("left", "right"))
     wav0 <- tuneR::mono(wav0, which = channel)
   }
+  # b) End modification ----
   
   prepped <- dynaSpec:::processSound(wav0, crop = crop, xLim = xLim, filter = filter, 
                           ampThresh)
