@@ -69,12 +69,15 @@ plot(df_Hyla$time.s, df_Hyla$samples.Right, type = "l")
 # 4) Oscillograms ----
 #
 #___________________________
+ylim <- max(abs(c(samples.Left, samples.Right)))/1000
+
 
 #Oscillogram LEFT
 ggoscilo_synth_L <- ggplot(df_Hyla)+
-  geom_line(mapping = aes(x=time.s, y=samples.Left/1000), color="#3f9dcf")+
+  geom_line(mapping = aes(x=time.s, y=samples.Left/1000), color="#3f9dcf", linewidth = 0.4)+
   #scale_x_continuous(expand = c(0,0))+
   scale_x_continuous(expand = c(0,0),  limits = c(0, max(time.s)))+
+  scale_y_continuous(limits = c(-ylim, ylim))+
   labs(x = "Time (s)", y = "")+
   theme_bw()+
   theme(plot.margin = unit(c(0.1, 0.1, 0, 0.1), "lines"),  # top, right, bottom, left
@@ -89,29 +92,34 @@ ggoscilo_synth_L <- ggplot(df_Hyla)+
         text = element_text(family = font.family),
         axis.ticks.length = unit(0, "cm"),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-ggoscilo_synth_L
+#ggoscilo_synth_L
 
 
 #Oscillogram RIGHT
 ggoscilo_synth_R <- ggplot(df_Hyla)+
-  geom_line(mapping = aes(x=time.s, y=samples.Right/1000), color="#f9bc3e")+
+  geom_line(mapping = aes(x=time.s, y=samples.Right/1000), color="#f9bc3e", linewidth = 0.4)+
  # scale_x_continuous(expand = c(0,0))+
   scale_x_continuous(expand = c(0,0),  limits = c(0, max(time.s)))+
+  scale_y_continuous(limits = c(-ylim, ylim))+
   labs(x = "Time (s)", y = "")+
   theme_bw()+
+  annotate("segment", x = 0.05, xend = 0.15, y = -0.8*ylim, yend = -0.8*ylim, linewidth = 1.5) + # Add axis
+  annotate("text", x = 0.10, y = -0.9*ylim, label = "100 ms", size = 5) + # Add axis
+
   theme(plot.margin = unit(c(0, 0.1, 0.1, 0.1), "lines"),  # top, right, bottom, left
         axis.title=element_text(size=18),
         axis.text=element_text(size=14),
         axis.text.y=element_blank(),
         axis.ticks.y=element_blank(),
-        # axis.title.x=element_blank(),
-        # axis.text.x=element_blank(),
+          axis.title.x=element_blank(),
+          axis.text.x=element_blank(),
         panel.border = element_blank(),
-        axis.line.x = element_line(colour = "black"),
+       # axis.line.x = element_line(colour = "black"),
         text = element_text(family = font.family),
-        axis.ticks.length = unit(-0.2, "cm"),
+        axis.ticks.length = unit(0, "cm"), # replaced -0.2 for 0 for new time axis.
         panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-ggoscilo_synth_R
+#ggoscilo_synth_R
+
 
 # Combine L-R oscillograms:
 oscillo_LR <- plot_grid(ggoscilo_synth_L, ggoscilo_synth_R, 
@@ -123,7 +131,7 @@ oscillo_LR <- plot_grid(ggoscilo_synth_L, ggoscilo_synth_R,
           label_fontface = "plain",
           label_fontfamily = font.family,
           ncol = 1,
-          rel_heights = c(1, 1.25))
+          rel_heights = c(1, 1))
 oscillo_LR
 
 # Export figure
@@ -194,9 +202,10 @@ params_R <- prep_static_ggspectro_pal("Hyla_stereo.wav" ,
 #Spectrogram LEFT (top plot)
 ggspectro_synth_L <- params_L$spec[[1]]+
   scale_x_continuous(expand = c(0,0), limits = c(0, max(time.s)))+
-  scale_y_continuous(expand = c(0,0), limits = freq.lim,
-                     breaks = seq(1,4,1), labels = seq(1,4,1))+
+  #scale_y_continuous(expand = c(0,0), limits = freq.lim, breaks = seq(1,4,1), labels = seq(1,4,1))+
+  scale_y_log10(expand = c(0,0), breaks = seq(1,4,1), labels = seq(1,4,1), limits = c(0.75, 5))+
   labs(x = "", y = "Frequency (kHz)")+
+
   theme(axis.text=element_text(size=14),
         axis.title=element_text(size=18, face="plain"),
         text = element_text(family = font.family),
@@ -207,10 +216,12 @@ ggspectro_synth_L <- params_L$spec[[1]]+
         plot.margin = margin(0.1, 0.1, 0.1, 0.1, "lines"))  # top, right, bottom, left
 ggspectro_synth_L
 
+
 #Spectrogram RIGHT (bottom plot)
 ggspectro_synth_R <- params_R$spec[[1]]+
   scale_x_continuous(expand = c(0,0),  limits = c(0, max(time.s)))+
-  scale_y_continuous(expand = c(0,0), limits = freq.lim,breaks = seq(1,4,1), labels = seq(1,4,1))+
+  #scale_y_continuous(expand = c(0,0), limits = freq.lim,breaks = seq(1,4,1), labels = seq(1,4,1))+
+  scale_y_log10(expand = c(0,0), breaks = seq(1,4,1), labels = seq(1,4,1), limits = c(0.75, 5))+
   labs(x = "Time (s)", y = "Frequency (kHz)")+
   theme(axis.text=element_text(size=14),
         axis.title=element_text(size=18, face="plain"),
@@ -220,7 +231,7 @@ ggspectro_synth_R <- params_R$spec[[1]]+
         axis.ticks.length = unit(-0.2, "cm"),
         axis.ticks = element_line(color="white"),
         plot.margin = margin(0.1, 0.1, 0.1, 0.1, "lines"))  # top, right, bottom, left
-ggspectro_synth_R
+#ggspectro_synth_R
 
 # Combine L-R spectrograms:
 spectro_LR <- plot_grid(ggspectro_synth_L, ggspectro_synth_R,
