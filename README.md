@@ -6,6 +6,16 @@ Nice-looking bioacoustic figures
 Code for making oscillograms and spectrograms of stereo files using
 ggplot2.
 
+**Last updates:**
+
+- Modified to allow using any color palette on spectrogram (e.g.,
+  parula)
+
+- Added log-transformed frequency axis on spectrogram following [Cardoso
+  (2025)](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.70145).
+
+- Added time bar to oscillogram and removed time as a line axis.
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- ## Status -->
 <!-- Project is: _in progress_ -->
