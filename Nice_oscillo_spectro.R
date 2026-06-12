@@ -104,7 +104,7 @@ ggoscilo_synth_R <- ggplot(df_Hyla)+
   labs(x = "Time (s)", y = "")+
   theme_bw()+
   annotate("segment", x = 0.05, xend = 0.15, y = -0.8*ylim, yend = -0.8*ylim, linewidth = 1.5) + # Add axis
-  annotate("text", x = 0.10, y = -0.9*ylim, label = "100 ms", size = 5) + # Add axis
+  annotate("text", x = 0.10, y = -0.95*ylim, label = "100 ms", size = 5) + # Add axis
 
   theme(plot.margin = unit(c(0, 0.1, 0.1, 0.1), "lines"),  # top, right, bottom, left
         axis.title=element_text(size=18),
