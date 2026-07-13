@@ -43,7 +43,7 @@ BuYe <- rev(c("#f6e58d", "#f9d56e", "#f9bc3e", "#66bfbf", "#3f9dcf", "#2d6a9b", 
 # 2) Load audiofile ----
 #
 #___________________________
-Hyla_call <- readWave("Hyla_stereo.wav")
+Hyla_call <- readWave("wavs/Hyla_stereo.wav")
 Hyla_call
 
 
@@ -155,7 +155,7 @@ colbins <- abs(min.dB)  # color bins, one color bin per dB.
 
 # Make preliminar spectrograms. These will be used below:
 # Left channel:
-params_L <- prep_static_ggspectro_pal("Hyla_stereo.wav" ,
+params_L <- prep_static_ggspectro_pal("wavs/Hyla_stereo.wav" ,
                                      channel = "left", # left channel.
                                      #colPal = BuYe,
                                      #colPal = c("#0a1e3f", "#f6e58d")
@@ -175,7 +175,7 @@ params_L <- prep_static_ggspectro_pal("Hyla_stereo.wav" ,
 
 
 # Right channel:
-params_R <- prep_static_ggspectro_pal("Hyla_stereo.wav" ,
+params_R <- prep_static_ggspectro_pal("wavs/Hyla_stereo.wav" ,
                                      channel = "right", # right channel.
                                      #colPal = palette,
                                      #colPal = poison_palette("Ramazonica", return = "vector"),
